@@ -1,24 +1,6 @@
 <section>
-    <!-- Wallet -->
-    <div class="stats-vertical mb-12 bg-base-100 text-primary-content">
-        <div class="stat place-items-center gap-4">
-            <div class="mb-2 text-2xl opacity-70">Account Balance</div>
-            <div class="stat-value">₹{{ Auth::user()->wallet }}</div>
-            <div class="stat-actions">
-                <button class="btn-success btn-sm btn text-base">Add funds</button>
-
-                @if (Auth::user()->active_status === 1)
-                    {!! '<button class="btn-sm text-base btn"><a href="https://www.google.com">Withdraw</a></button>' !!}
-                @else
-                    {!! '<button class="btn-sm btn  text-base">Withdraw</button>' !!}
-                @endif
-            </div>
-        </div>
-    </div>
-
-    <div class="divider"> </div>
     <!-- welcome card -->
-    <div class="card mx-auto w-96 rounded-xl bg-black shadow-xl">
+    <div class="card mx-auto bg-base-300 shadow-xl">
         <div class="card-body items-center space-y-4">
             <h2 class="card-title items-center justify-center text-2xl">
                 Welcome, {{ Auth::user()->name }} 🥰
@@ -26,24 +8,41 @@
             <div class="info space-y-1">
                 {{-- <p>Get <span class="font-bold">₹10</span> Every Single Day</p> --}}
                 @if (Auth::user()->active_status === 0)
-                    {!! '<p>Start by Adding <span class="font-bold">₹100</span> & Activate Your ID</p>' !!}
+                    {!! '<p>Add Funds <span class="font-bold">₹100</span> & Activate Your ID</p>' !!}
                 @else
-                    {!! 'Refer Others | Get Daily Income' !!}
+                    {!! 'Refer & Earn' !!}
                 @endif
             </div>
         </div>
     </div>
 
-    <div class="divider"> </div>
+    <!-- Wallet -->
+    <div class="stats-vertical my-12">
+        <div class="stat place-items-center gap-2">
+            <div class="mb-2 text-2xl text-primary-content opacity-70">Account Balance</div>
+            <div class="stat-value text-primary">₹{{ Auth::user()->wallet }}</div>
+            <div class="stat-actions">
+                <button class="btn-base btn-primary btn border-primary">Add funds</button>
+
+                @if (Auth::user()->active_status === 1)
+                    {!! '<button class="btn-base text-base btn"><a href="https://www.google.com">Withdraw</a></button>' !!}
+                @else
+                    {!! '<button class="btn-base bg-slate-800 btn text-base">Withdraw</button>' !!}
+                @endif
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- USER ID -->
-    <div class="mt-12 overflow-x-auto">
+    <div class="overflow-x-auto">
         <table class="table w-full">
             <!-- head -->
             <thead>
                 <tr>
                     <th></th>
-                    <th>ID-Status</th>
+                    <th>Status</th>
                     <th>Refer-Code</th>
                 </tr>
             </thead>
@@ -53,9 +52,9 @@
                     <th>👉</th>
                     <td>
                         @if (Auth::user()->active_status === 0)
-                            {!! 'Inactive' !!}
+                            {!! 'INACTIVE' !!}
                         @else
-                            {!! 'Active' !!}
+                            {!! 'ACTIVE' !!}
                         @endif
                     </td>
                     <td>

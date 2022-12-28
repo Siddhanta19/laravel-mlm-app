@@ -64,4 +64,16 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::updating(function ($user) {
+            if ($user->getOriginal('active_status') != $user->active_status) {
+                // run income distribution function
+            }
+        });
+    }
 }

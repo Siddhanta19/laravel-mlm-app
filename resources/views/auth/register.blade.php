@@ -8,7 +8,7 @@
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
-            <h2 class="card-title mb-8 justify-center text-2xl">Register & Earn</h2>
+            <h2 class="card-title mb-8 justify-center text-3xl">Register & Earn</h2>
 
             <div>
                 {{-- <x-jet-label for="name" value="{{ __('Name') }}" /> --}}
@@ -69,7 +69,7 @@
             @endif
 
             <div class="mt-8 flex items-center justify-around">
-                <a class="link text-primary underline-offset-2" href="{{ route('login') }}">
+                <a class="link text-xl text-primary underline-offset-2" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
 
