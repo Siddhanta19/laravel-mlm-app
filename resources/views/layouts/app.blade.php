@@ -39,7 +39,7 @@
         </main>
 
         <footer
-            class="footer items-center justify-center rounded bg-base-200 px-5 py-10 text-base-content md:justify-between">
+            class="footer items-center justify-center rounded px-5 py-10 text-base-content md:justify-between">
 
             {{-- <div>
                 <div class="relative">
