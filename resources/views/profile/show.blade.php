@@ -29,9 +29,7 @@
                 <x-jet-section-border />
             @endif
 
-            {{-- <div class="mt-10 sm:mt-0">
-                @livewire('profile.logout-other-browser-sessions-form')
-            </div> --}}
+
 
             <div class="mt-10 sm:mt-0">
                 @livewire('profile.update-bank-details-form')
@@ -44,6 +42,10 @@
                     @livewire('profile.delete-user-form')
                 </div>
             @endif
+
+            <div class="mt-10">
+                @livewire('profile.logout-other-browser-sessions-form')
+            </div>
         </div>
     </div>
 </x-app-layout>

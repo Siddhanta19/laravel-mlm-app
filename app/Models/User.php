@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasProfilePhoto;
+use Illuminate\Notifications\Notifiable;
+use App\Actions\Utility\IncomeDistributer;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -19,6 +20,14 @@ class User extends Authenticatable
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
+
+    // protected $incomeDistributer;
+
+    // public function __construct(IncomeDistributer $incomeDistributer)
+    // {
+    //     $this->incomeDistributer = $incomeDistributer;
+    // }
+
 
     /**
      * The attributes that are mass assignable.
@@ -66,13 +75,25 @@ class User extends Authenticatable
     ];
 
 
+    /**
+     * Get the bank associated with the user.
+     */
+    public function bank()
+    {
+        return $this->hasOne(Bank::class, 'user_id');
+    }
+
+
+
     public static function boot()
     {
         parent::boot();
 
-        static::updating(function ($user) {
-            if ($user->getOriginal('active_status') != $user->active_status) {
-                // run income distribution function
+        $incomeDistributer = new IncomeDistributer;
+
+        static::updated(function ($user) use ($incomeDistributer) {
+            if ($user->isDirty('active_status')) {
+                $incomeDistributer->incomeDistribution($user->{"my_referrer's_code"});
             }
         });
     }

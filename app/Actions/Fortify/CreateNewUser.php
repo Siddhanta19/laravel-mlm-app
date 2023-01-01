@@ -17,18 +17,16 @@ use Laravel\Fortify\Contracts\CreatesNewUsers;
 class CreateNewUser implements CreatesNewUsers
 {
     protected $referCodeGenerator;
-    protected $incomeDistributer;
-
     protected $incrementReferCount;
 
     use PasswordValidationRules;
 
 
-    public function __construct(ReferCodeGenerator $referCodeGenerator, IncrementReferCount $incrementReferCount, IncomeDistributer $incomeDistributer)
+    public function __construct(ReferCodeGenerator $referCodeGenerator, IncrementReferCount $incrementReferCount)
     {
         $this->referCodeGenerator = $referCodeGenerator;
         $this->incrementReferCount = $incrementReferCount;
-        $this->incomeDistributer = $incomeDistributer;
+
     }
 
     /**
@@ -62,7 +60,6 @@ class CreateNewUser implements CreatesNewUsers
                 ]),
                 function (User $user) use ($input) {
                     $this->createTeam($user);
-                    $this->incomeDistributer->incomeDistribution($input["my_referrer's_code"]);
                     $this->incrementReferCount->incrementReferCount($input["my_referrer's_code"]);
                 }
             );

@@ -20,8 +20,6 @@ class UserReferralHistoryController extends Controller
         $referredUsers = User::where("my_referrer's_code", $request->user()->my_refer_code)->get();
 
         return view('referral.show', [
-            'request' => $request,
-            'user' => $request->user(),
             'referredUsers' => $referredUsers,
             // Pass the referred users to the view
         ]);

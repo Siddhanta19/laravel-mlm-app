@@ -2,23 +2,47 @@
     <!-- Primary Navigation Menu -->
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 justify-between">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="flex shrink-0 items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
-                    </a>
-                </div>
 
-                <!-- Navigation Links -->
+            <!-- Logo -->
+            <div class="flex shrink-0 items-center">
+                <a href="{{ route('dashboard') }}">
+                    <x-jet-application-mark class="block h-9 w-auto" />
+                </a>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="flex">
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                        {{ __('Profile') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('referral.show') }}" :active="request()->routeIs('referral.show')">
+                        {{ __('Referral Information') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden items-center justify-center space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+
+                        <x-jet-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                            {{ __('Log Out') }}
+                        </x-jet-nav-link>
+                    </form>
+                </div>
             </div>
 
-            <div class="hidden sm:ml-6 sm:flex sm:items-center">
+
+            {{--  <div class="hidden sm:ml-6 sm:flex sm:items-center">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="relative ml-3">
@@ -114,14 +138,15 @@
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
                             </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ route('referral.show') }}">
+                                {{ __('Referral') }}
+                            </x-jet-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
                                     {{ __('API Tokens') }}
                                 </x-jet-dropdown-link>
                             @endif
-
-                            <div class="border-t border-gray-100"></div>
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}" x-data>
@@ -135,7 +160,7 @@
                     </x-jet-dropdown>
                 </div>
             </div>
-
+ --}}
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button class="inline-flex items-center justify-center rounded-md p-2 transition focus:outline-none"
@@ -154,14 +179,14 @@
 
     <!-- Responsive Navigation Menu -->
     <div class="hidden sm:hidden" :class="{ 'block': open, 'hidden': !open }">
-        <div class="space-y-1 pt-2">
+        <div class="mb-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="border-y border-indigo-600 pt-4 pb-1">
+        <div class="border-b border-primary pb-1">
             <div class="px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="mr-3 shrink-0">
@@ -170,20 +195,20 @@
                     </div>
                 @endif
 
-                <div class="flex items-center justify-between">
+                {{-- <div class="flex items-center justify-between">
                     <div class="text-base font-medium text-primary-content">{{ Auth::user()->name }}</div>
                     <div class="text-sm font-medium text-primary-content">{{ Auth::user()->email }}</div>
-                </div>
+                </div> --}}
             </div>
 
-            <div class="mt-3 space-y-1">
+            <div class="space-y-1">
                 <!-- Account Management -->
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-jet-responsive-nav-link>
 
                 <x-jet-responsive-nav-link href="{{ route('referral.show') }}" :active="request()->routeIs('referral.show')">
-                    {{ __('Referral History') }}
+                    {{ __('Referral Information') }}
                 </x-jet-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())

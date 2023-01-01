@@ -4,8 +4,8 @@
         <x-slot name="description">{{ $description }}</x-slot>
     </x-jet-section-title>
 
-    <div class="mt-5 md:mt-0 md:col-span-2">
-        <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
+    <div class="mt-5 md:col-span-2 md:mt-0">
+        <div class="bg-zinc-900 px-4 py-5 shadow sm:rounded-lg sm:p-6">
             {{ $content }}
         </div>
     </div>

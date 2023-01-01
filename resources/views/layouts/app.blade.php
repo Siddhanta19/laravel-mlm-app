@@ -27,7 +27,7 @@
         <!-- Page Heading -->
         {{-- header variable uses the x-slot name='header' element if it is defined on the page where this layout component is used. --}}
         @if (isset($header))
-            <header class="border-b border-primary shadow">
+            <header class="border-b border-primary sm:hidden">
                 <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
@@ -39,7 +39,7 @@
         </main>
 
         <footer
-            class="footer items-center justify-center rounded px-5 py-10 text-base-content md:justify-between">
+            class="footer mt-14 items-center justify-center rounded px-5 py-10 text-base-content md:justify-between">
 
             {{-- <div>
                 <div class="relative">
